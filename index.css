@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+
+}
+.buttons {
+    text-align: center;
+}
+ul {
+    text-align: center;
+    list-style-type: none;
+    padding: 0 20px 0;
+}
+
+.book {
+    border: 1px solid black;
+    margin: 0 20px 0;
+}
