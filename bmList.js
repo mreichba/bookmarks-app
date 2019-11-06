@@ -1,11 +1,10 @@
-
-
+import bmStore from './bmStore.js'; 
+import api from './api.js';
 
 const generateElementHTML = function(bookmark) {
   console.log('generateElementHTML was called!');
-  let bmHTML = '<ul class="bookmarks">'
+  let bmHTML = '<ul class="bookmarks">';
   return bmHTML += `
-  <ul class="bookmarks">
     <li id="${bookmark.id}" class="book"><button>+</button>
       <div class="bmTitle">
         <p>${bookmark.title}</p>
