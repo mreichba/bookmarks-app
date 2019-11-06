@@ -1,4 +1,4 @@
-import cuid from 'cuid';
+
 
 const validateName = function(title) {
   if (!title) throw new TypeError('Name must not be blank');
