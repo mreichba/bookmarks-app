@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookmark App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<header role="banner" class="header">
+    <h1 aria-label="Bookmark App">My Bookmarks</h1>
+    <div class="buttons">
+        <button type ="button" class="new button"> + New Bookmark</button>
+        <select class="dropdown" name="ratings" id="rating-select">
+            <option value="filterReviews" name="">Filter Reviews by Rating</option>
+            <option value=">= 5-star" name=">= 5-star">>= 5-star</option>
+            <option value=">= 4-star" name=">= 4-star">>= 4-star</option>
+            <option value=">= 3-star" name=">= 3-star">>= 3-star</option>
+            <option value=">= 2-star" name=">= 2-star">>= 2-star</option>
+            <option value=">= 1-star" name=">= 1-star">>= 1-star</option>
+        </select>
+    </div>
+</header>
+
+<body>
+    <main class="list">
+        <ul class="bookmarks">
+            <li id="11" class="book"><button class="collapseButton">-</button>
+                <div class="bmHeader">
+                    <p>title 11 & rating</p>
+                </div>
+                <div class="expand-collapse">
+                    <p class="bmDescription">Description</p>
+                    <p class="bmDescription-text">some random text</p>
+                </div>
+                <div class="bmControls">
+                    <button class="bmWebsite button">Visit Site</button>
+                    <button class="bmDelete button">Remove</button>
+                </div>
+            </li>
+            <li id="10" class="book"><button>+</button>
+                <div class="bmHeader">
+                        <p>title 10 & rating</p>
+                </div>
+                <div class="expand-collapse hidden">
+                        <p class="bmDescription">Description</p>
+                        <p class="bmDescription-text">some random text</p>
+                </div>
+                <div class="bmControls">
+                        <button class="bmWebsite button">Visit Site</button>
+                        <button class="bmDelete button">Remove</button>
+                </div>
+            </li>
+            <li id="9" class="book"> title 9 & rating<button>+</button></li>
+            <li id="8" class="book"> title 8 & rating<button>+</button></li>
+            <li id="7" class="book"> title 7 & rating<button>+</button></li>
+            <li id="6" class="book"> title 6 & rating<button>+</button></li>
+            <li id="5" class="book"> title 5 & rating<button>+</button></li>
+            <li id="4" class="book"> title 4 & rating<button>+</button></li>
+            <li id="3" class="book"> title 3 & rating<button>+</button></li>
+            <li id="2" class="book"> title 2 & rating<button>+</button></li>
+            <li id="1" class="book"> title 1 & rating<button>+</button></li>
+        </ul>
+    </main>
+
+
+
+    <code>
+        const store = {
+        bookmarks: [
+          {
+            id: 'x56w',
+            title: 'Title 1',
+            rating: 3,
+            url: 'http://www.title1.com',
+            description: 'lorem ipsum dolor sit',
+            expanded: false
+          },
+          {
+            id: '6ffw',
+            title: 'Title 2',
+            rating: 5,
+            url: 'http://www.title2.com',
+            description: 'dolorum tempore deserunt',
+            expanded: false
+          } 
+          
+        ],
+        adding: false,
+        error: null,
+        filter: 0
+      };
+    </code>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="index.js"></script>    
+</body>
+</html>

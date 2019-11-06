@@ -9,21 +9,21 @@
 </head>
 <!-- need to disable or hide new bookmark button -->
 <header role="banner" class="header">
-        <h1 aria-label="Bookmark App">My Bookmarks</h1>
-        <div class="buttons">
-            <button class="newButton" type ="button"> + New Bookmark</button>
-            <select class="dropdown" name="ratings" id="rating-select">
-                <option value="filterReviews" name="">Filter Reviews by Rating</option>
-                <option value=">= 5-star" name=">= 5-star">>= 5-star</option>
-                <option value=">= 4-star" name=">= 4-star">>= 4-star</option>
-                <option value=">= 3-star" name=">= 3-star">>= 3-star</option>
-                <option value=">= 2-star" name=">= 2-star">>= 2-star</option>
-                <option value=">= 1-star" name=">= 1-star">>= 1-star</option>
-            </select>
-        </div>
-    </header>
+    <h1 aria-label="Bookmark App">My Bookmarks</h1>
+    <div class="buttons">
+        <button class="newButton" type ="button"> + New Bookmark</button>
+        <select class="dropdown" name="ratings" id="rating-select">
+            <option value="filterReviews" name="">Filter Reviews by Rating</option>
+            <option value=">= 5-star" name=">= 5-star">>= 5-star</option>
+            <option value=">= 4-star" name=">= 4-star">>= 4-star</option>
+            <option value=">= 3-star" name=">= 3-star">>= 3-star</option>
+            <option value=">= 2-star" name=">= 2-star">>= 2-star</option>
+            <option value=">= 1-star" name=">= 1-star">>= 1-star</option>
+        </select>
+    </div>
+</header>
 <body>
-    <form>
+    <form> <!--from here to form close tag is what will be new-->
         <fieldset>
         <div class="top">
             <legend>Create Bookmark</legend>
@@ -41,23 +41,21 @@
         </div>  
         </fieldset>
         <input type="submit" value="Submit">
-    </form>
+    </form> <!--untill right here ------------------------->
     <main class="list">
-       
-        
-            <ul class="bookmarks">
-                <li class="book"> title 11</li>
-                <li class="book"> title 10</li>
-                <li class="book"> title 9</li>
-                <li class="book"> title 8</li>
-                <li class="book"> title 7</li>
-                <li class="book"> title 6</li>
-                <li class="book"> title 5</li>
-                <li class="book"> title 4</li>
-                <li class="book"> title 3</li>
-                <li class="book"> title 2</li>
-                <li class="book"> title 1</li>
-            </ul>
+        <ul class="bookmarks">
+            <li class="book"> title 11 & rating</li>
+            <li class="book"> title 10 & rating</li>
+            <li class="book"> title 9 & rating</li>
+            <li class="book"> title 8 & rating</li>
+            <li class="book"> title 7 & rating</li>
+            <li class="book"> title 6 & rating</li>
+            <li class="book"> title 5 & rating</li>
+            <li class="book"> title 4 & rating</li>
+            <li class="book"> title 3 & rating</li>
+            <li class="book"> title 2 & rating</li>
+            <li class="book"> title 1 & rating</li>
+        </ul>
         
         
     </main>
