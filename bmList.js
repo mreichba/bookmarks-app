@@ -1,6 +1,12 @@
 
 
 
-function generateElementHTML = function(bookmark) {
+const generateElementHTML = function(bookmark) {
+  return `
+
+ `
+}
+
+function render() {
 
 }
