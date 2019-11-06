@@ -6,16 +6,73 @@ header {
     text-align: center;
 
 }
+
 .buttons {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.newButton, .dropdown {
+    margin: 0 10px 0;
 }
 ul {
     text-align: center;
     list-style-type: none;
-    padding: 0 20px 0;
+    padding: 0 10px 0;
+    
 }
 
 .book {
     border: 1px solid black;
-    margin: 0 20px 0;
+    margin: 10px 10px;
+    padding: 7px;
+}
+
+.book button {
+    float: right;
+    /* margin: 0 5px 0 0; */
+    display: inline;
+    align-self: right;
+  
+}
+
+fieldset {
+
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+}
+
+.description {
+    height: 100px;
+}
+
+input {
+    display: block;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    padding: 10px 0;
+}
+
+.top input{
+    margin: 5px;
+}
+
+.bmControls{
+display: flex;
+justify-content: space-between;;
+}
+
+.hidden {
+    display: none;
 }
