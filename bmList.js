@@ -22,7 +22,57 @@ const generateElementHTML = function(bookmark) {
   `;
 };
 // have to set website and remove buttons above still
+//below i need to modify render for errors
 function render() {
   console.log('render was called!');
+  let bookmarks = [...bmStore.bookmarks];
+  if (bmStore.filterRating) {
+    bookmarks = bookmarks.filter(bookmark => bookmark.rating >= bmStore.filterRating);
+  }
+  const bookmarkListString = generateBookmarkString(bookmarks);
+  $('.list').html(bookmarkListString);
+}
+
+function generateBookmarkString(bookmarks) {
+  const bookmarkItems = bookmarks.map((bookmark) => generateElementHTML(bookmark));
+  return bookmarkItems.join('');
+}
+
+function handleAddBookmarkFormClick() {
 
 }
+
+function serializeJson(form) {
+  const formData = new FormData(form);
+  let obj = {};
+  formData.forEach((val, name) => obj[name] = val);
+  return obj;
+}
+
+function handleNewBookmarkSubmit() {
+
+}
+
+function getElementBookmarkID(bookmark) {
+  return $(bookmark)
+    .closest('.book')
+    .data('id');
+}
+
+function handleDeleteBookmarkClicked() {
+
+}
+
+function handleBookmarkExpandClicked() {
+
+}
+
+function handleRatingsFilter() {
+
+}
+
+function bindEventListeners() {
+
+}
+
+export 
