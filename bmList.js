@@ -8,7 +8,7 @@ const generateElementHTML = function(bookmark) {
     <li id="${bookmark.id}" class="book">
       <button class="expand">+</button>
       <div class="bmTitle">
-        <p>${bookmark.title}</p>
+        <p>${bookmark.title}  Rating: ${bookmark.rating} Stars</p>
       </div>
       <div class="expand-collapse hidden">
         <p class="bmDescription">Description</p>
@@ -118,12 +118,19 @@ function handleDeleteBookmarkClicked() {
 function handleBookmarkExpandClicked() {
   $('.list').on('click', '.expand', event => {
     event.preventDefault();
-    if ('.expand'.innerhtml ==='+'){ //need to fix this to target html
+    let collapse = $(event.target).text();
+    console.log(collapse);
+    if (collapse === '+') {
+      console.log(collapse);
+      
       $(event.target).parent().find('.expand-collapse').removeClass('hidden');
-      //change html to a '-'
-    } else {
+      $(event.target).html('-');
+    } 
+    if (collapse === '-') {
+      console.log(collapse);
       $(event.target).parent().find('.expand-collapse').addClass('hidden');
-      //change html to a '+'
+      $(event.target).html('+');
+     
     }
   });
 }
