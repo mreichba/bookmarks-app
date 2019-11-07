@@ -46,7 +46,7 @@ const toggleExpand = function(id, expanded){
 
 const filterRating = function(rating) {
   this.filterRating = rating;
-}
+};
 
 
 export default {

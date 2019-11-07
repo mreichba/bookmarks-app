@@ -7,23 +7,23 @@
     <title>Bookmark App</title>
     <link rel="stylesheet" href="index.css">
 </head>
-
-<header role="banner" class="header">
-    <h1 aria-label="Bookmark App">My Bookmarks</h1>
-    <div class="buttons">
-        <button type ="button" class="new button"> + New Bookmark</button>
-        <select class="dropdown" name="ratings" id="rating-select">
-            <option value="filterReviews" name="">--Filter Reviews by Rating--</option>
-            <option value=">= 5-star" name=">= 5-star">>= 5-star</option>
-            <option value=">= 4-star" name=">= 4-star">>= 4-star</option>
-            <option value=">= 3-star" name=">= 3-star">>= 3-star</option>
-            <option value=">= 2-star" name=">= 2-star">>= 2-star</option>
-            <option value=">= 1-star" name=">= 1-star">>= 1-star</option>
-            <option value=">= 0-star" name=">= 0-star">>= 0-star</option>
-        </select>
-    </div>
-</header>
 <body>
+    <header role="banner" class="header">
+        <h1 aria-label="Bookmark App">My Bookmarks</h1>
+        <div class="buttons">
+            <button type ="button" id="newBookmark" class="new button"> + New Bookmark</button>
+            <select class="dropdown" name="ratings" id="rating-select">
+                <option value="filterReviews" name="">--Filter Reviews by Rating--</option>
+                <option value=">= 5-star" name=">= 5-star">>= 5-star</option>
+                <option value=">= 4-star" name=">= 4-star">>= 4-star</option>
+                <option value=">= 3-star" name=">= 3-star">>= 3-star</option>
+                <option value=">= 2-star" name=">= 2-star">>= 2-star</option>
+                <option value=">= 1-star" name=">= 1-star">>= 1-star</option>
+                <option value=">= 0-star" name=">= 0-star">>= 0-star</option>
+            </select>
+        </div>
+        <div class="newForm"></div>
+    </header>
     
     <main class="list">
        
