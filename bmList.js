@@ -2,7 +2,6 @@ import bmStore from './bmStore.js';
 
 
 const generateElementHTML = function(bookmark) {
-  console.log('generateElementHTML was called!');
   let bmHTML = '<ul class="bookmarks">';
   return bmHTML += `
     <li id="${bookmark.id}" class="book">
@@ -83,13 +82,19 @@ function serializeJson(form) {
 }
 
 function handleNewBookmarkSubmit() {
+  console.log('handle submit called!')
   $('.newForm').on('submit', '.formSubmit', event => {
+    console.log('this called!');
     event.preventDefault();
     let formElement = $('.formView')[0];
+    console.log(formElement);
     let newBookmarkName = serializeJson(formElement);
-    $('.new').removeClass('hidden');
-    $('.formView').addClass('hidden');
-    $('.formView')[0].reset();
+    // $('.new').removeClass('hidden');
+    // $('.formView').addClass('hidden');
+    // $('.formView')[0].reset();
+    bmStore.addBookmark(newBookmarkName);  
+    console.log(bmStore);        
+    render();
   });
 }
 
@@ -135,9 +140,7 @@ function handleBookmarkExpandClicked() {
 
 function handleRatingsFilter() {
   $('.dropdown').on('change', event => {
-    console.log('handle rating called!');
     const ratingChosen = $(event.currentTarget).val();
-    console.log(ratingChosen);
     bmStore.filterRating(ratingChosen);
     render();
   });
