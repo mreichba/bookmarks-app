@@ -54,11 +54,9 @@ function formRender(){
 function render() {
   let bookmarks = [...bmStore.bookmarks];
   
-  
-
-  // if (bmStore.filterRating) {
-  //   bookmarks = bookmarks.filter(bookmark => bookmark.rating >= bmStore.filterRating);
-  // }
+  if (bmStore.filterNum) {
+    bookmarks = bookmarks.filter(bookmark => bookmark.rating >= bmStore.filterNum);
+  }
   const bookmarkListString = generateBookmarkString(bookmarks);
   
   $('.list').html(bookmarkListString);
@@ -136,7 +134,13 @@ function handleBookmarkExpandClicked() {
 }
 
 function handleRatingsFilter() {
-
+  $('.dropdown').on('change', event => {
+    console.log('handle rating called!');
+    const ratingChosen = $(event.currentTarget).val();
+    console.log(ratingChosen);
+    bmStore.filterRating(ratingChosen);
+    render();
+  });
 }
 
 function bindEventListeners() {
@@ -145,6 +149,7 @@ function bindEventListeners() {
   handleBookmarkExpandClicked();
   handleNewBookmarkSubmit();
   handleDeleteBookmarkClicked();
+  handleRatingsFilter();
 }
 
 export default {

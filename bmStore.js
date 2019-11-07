@@ -19,7 +19,7 @@ const bookmarks = [
 ];
 let adding = false;
 let error = null;
-let filter = 0;
+let filterNum = 0;
 
 const findById = function (id) {
   return this.bookmarks.find(bookmark => bookmark.id === id);
@@ -45,14 +45,14 @@ const toggleExpand = function(id, expanded){
 };
 
 const filterRating = function(rating) {
-  this.filterRating = rating;
+  this.filterNum = rating;
 };
 
 
 export default {
   bookmarks,
   error,
-  filter,
+  filterNum,
   findById,
   adding,
   findAndDelete,
