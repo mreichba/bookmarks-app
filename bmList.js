@@ -1,7 +1,9 @@
 import bmStore from './bmStore.js';
 import api from './api.js';
 
+
 const generateElementHTML = function(bookmark) {
+  console.log(bookmark);
   let bmHTML = '<ul class="bookmarks">';
   return bmHTML += `
     <li id="${bookmark.id}" class="book">
@@ -11,10 +13,10 @@ const generateElementHTML = function(bookmark) {
       </div>
       <div class="expand-collapse hidden">
         <p class="bmDescription">Description</p>
-        <p class="bmDescription-text">${bookmark.description}</p>
+        <p class="bmDescription-text">${bookmark.desc}</p>
       </div>
       <div class="bmControls">
-        <button class="bmWebsite button" target="_blank" onclick="window.open('${bookmark.url}','newwindow'>Visit Site</button>
+        <button class="bmWebsite button"><a href="${bookmark.url}" target="_blank">Visit Site</a></button>
         <button class="bmDelete button">Remove</button>
       </div>
     </li>
@@ -27,9 +29,9 @@ const generateFormElementHTML = function() {
     <fieldset>
       <div class="top">
         <legend>Create Bookmark</legend>
-        <input class="title" type="text" name="title" placeholder="Title">
-        <input class="website" type="text" name="website" placeholder="http://example.com">
-        <input class="description" type="text" name="description" placeholder="Enter a desciption">
+        <input class="title" type="text" name="title" placeholder="Title" required>
+        <input class="website" type="url" name="url" placeholder="http://example.com" value="https://" required>
+        <input class="description" type="text" name="desc" placeholder="Enter a desciption">
       </div>
       <div class="bottom">
         <p>Bookmark Rating:</p>
@@ -90,6 +92,7 @@ const handleNewBookmarkSubmit = function() {
     let formElement = $('.formView')[0];
     // console.log(formElement);
     let newBookmarkName = serializeJson(formElement);
+    console.log(typeof newBookmarkName);
     $('.new').removeClass('hidden');
     $('.formView').addClass('hidden');
     $('.formView')[0].reset();
@@ -120,9 +123,11 @@ const getElementBookmarkID = function(bookmark) {
 const handleDeleteBookmarkClicked = function() {
   $('.list').on('click', '.bmDelete', event => {
     const id = getElementBookmarkID(event.currentTarget);
+    console.log(id);
     api.deleteBookmark(id)
       .then(() => {
         bmStore.findAndDelete(id);
+        render();
       })
       .catch((error) => {
         bmStore.setError(error.message);

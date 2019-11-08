@@ -37,13 +37,13 @@ const getBookmarks = function(){
 };
   
 const createBookmark = function(newBookmarkName) {
-  let newData = JSON.stringify(newBookmarkName);
+  //let newData = JSON.stringify(newBookmarkName);
   return listApiFetch(`${BASE_URL}/bookmarks`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: newData
+    body: newBookmarkName
   });
 };
 

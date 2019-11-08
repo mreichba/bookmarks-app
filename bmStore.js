@@ -1,6 +1,6 @@
 
 const bookmarks = [
-  {
+  /*{
     id: 'x56w',
     title: 'Demo Title 1',
     rating: 3,
@@ -15,7 +15,7 @@ const bookmarks = [
     url: 'http://www.title2.com',
     description: 'dolorum tempore deserunt',
     expanded: false
-  }  
+  } */
 ];
 let adding = false;
 let error = null;

@@ -17,9 +17,9 @@ const main = function () {
   api.getBookmarks()
     .then((bookmarks) => {
       bookmarks.forEach((bookmark) => bmStore.addBookmark(bookmark));            
+      bmList.render();
     });
   bmList.bindEventListeners();
-  bmList.render();
 };
   
 $(main);
