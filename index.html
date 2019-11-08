@@ -12,7 +12,7 @@
         <h1 aria-label="Bookmark App">My Bookmarks</h1>
         <div class="buttons">
             <button type ="button" id="newBookmark" class="new button"> + New Bookmark</button>
-            <select class="dropdown" name="ratings" id="rating-select">
+            <select class="dropdown" name="ratings" aria-label="ratings" aria-live="polite">
                 <option value="filterReviews" name="">--Filter Reviews by Rating--</option>
                 <option value="5" name=">= 5-star">>= 5-star</option>
                 <option value="4" name=">= 4-star">>= 4-star</option>
@@ -22,15 +22,14 @@
                 <option value="0" name=">= 0-star">>= 0-star</option>
             </select>
         </div>
-        <div class="newForm"></div>
-        <div class="error-container"></div>
+        <div class="newForm" aria-live="polite"></div>
+        <div class="error-container" aria-live="polite"></div>
     </header>
     
-    <main class="list">
+    <main class="list" aria-live="polite">
        
           
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"crossorigin="anonymous"></script>
     <script src="index.js" type="module"></script>  
    

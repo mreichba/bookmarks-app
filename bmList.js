@@ -3,17 +3,16 @@ import api from './api.js';
 
 
 const generateElementHTML = function(bookmark) {
-  console.log(bookmark);
   let bmHTML = '<ul class="bookmarks">';
   return bmHTML += `
-    <li id="${bookmark.id}" class="book">
-      <button class="expand">+</button>
+    <li role="listitem" id="${bookmark.id}" class="book">
+      <button class="expand" aria-live="polite">+</button>
       <div class="bmTitle">
-        <p>${bookmark.title}  Rating: ${bookmark.rating} Stars</p>
+        <p><span>Title:</span> ${bookmark.title}</p>  
+        <p><span>Rating:</span> ${bookmark.rating} Stars</p>
       </div>
-      <div class="expand-collapse hidden">
-        <p class="bmDescription">Description</p>
-        <p class="bmDescription-text">${bookmark.desc}</p>
+      <div class="expand-collapse hidden" aria-live="polite">
+        <p class="bmDescription"><span>Description:</span> ${bookmark.desc}</p>
       </div>
       <div class="bmControls">
         <button class="bmWebsite button"><a href="${bookmark.url}" target="_blank">Visit Site</a></button>
@@ -29,17 +28,17 @@ const generateFormElementHTML = function() {
     <fieldset>
       <div class="top">
         <legend>Create Bookmark</legend>
-        <input class="title" type="text" name="title" placeholder="Title" required>
-        <input class="website" type="url" name="url" placeholder="http://example.com" value="https://" required>
-        <input class="description" type="text" name="desc" placeholder="Enter a desciption">
+        <input aria-label="title" class="title" type="text" name="title" placeholder="Title" required>
+        <input aria-label="website" class="website" type="url" name="url" placeholder="http://example.com" value="https://" required>
+        <input aria-label="description" class="description" role="textbox" type="text" name="desc" placeholder="Enter a desciption">
       </div>
-      <div class="bottom">
+      <div class="bottom" id="rating">
         <p>Bookmark Rating:</p>
-        <input class="radio" type="radio" name="rating" value="5-star"> 5-Star<br>
-        <input class="radio" type="radio" name="rating" value="4-star"> 4-Star<br>
-        <input class="radio" type="radio" name="rating" value="3-star"> 3-Star<br>
-        <input class="radio" type="radio" name="rating" value="2-star"> 2-Star<br>  
-        <input class="radio" type="radio" name="rating" value="1-star"> 1-Star<br>   
+        <input aria-label="5-star" class="radio" type="radio" name="rating" value="5-star"> 5-Star
+        <input aria-label="4-star" class="radio" type="radio" name="rating" value="4-star"> 4-Star
+        <input aria-label="3-star" class="radio" type="radio" name="rating" value="3-star"> 3-Star
+        <input aria-label="2-star" class="radio" type="radio" name="rating" value="2-star"> 2-Star  
+        <input aria-label="1-star" class="radio" type="radio" name="rating" value="1-star"> 1-Star  
       </div>  
       <input class="formSubmit button" type="submit" value="Submit"></input>
     </fieldset>
@@ -85,14 +84,10 @@ const serializeJson = function(form) {
 };
 
 const handleNewBookmarkSubmit = function() {
-  // console.log('handle submit called!');
   $('.newForm').on('submit', 'form', event => {
-    // console.log('this called!');
     event.preventDefault();
     let formElement = $('.formView')[0];
-    // console.log(formElement);
     let newBookmarkName = serializeJson(formElement);
-    console.log(typeof newBookmarkName);
     $('.new').removeClass('hidden');
     $('.formView').addClass('hidden');
     $('.formView')[0].reset();
@@ -123,7 +118,6 @@ const getElementBookmarkID = function(bookmark) {
 const handleDeleteBookmarkClicked = function() {
   $('.list').on('click', '.bmDelete', event => {
     const id = getElementBookmarkID(event.currentTarget);
-    console.log(id);
     api.deleteBookmark(id)
       .then(() => {
         bmStore.findAndDelete(id);
@@ -186,7 +180,7 @@ const handleCloseError = function () {
 };
 
 
-function bindEventListeners() {
+const bindEventListeners = function() {
   handleAddBookmarkFormClick();
   handleNewBookmarkClose();
   handleBookmarkExpandClicked();
@@ -194,7 +188,7 @@ function bindEventListeners() {
   handleDeleteBookmarkClicked();
   handleRatingsFilter();
   handleCloseError();
-}
+};
 
 export default {
   render,

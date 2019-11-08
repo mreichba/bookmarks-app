@@ -1,23 +1,38 @@
 *{
     box-sizing: border-box;
 }
-
+body{
+    background-color: lightgrey;
+}
 header {
     text-align: center;
 
+}
+
+.dropdown {
+    background-color: rgb(184, 180, 180);
+}
+
+.button a {
+    color: black;
+    text-decoration: none;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
 }
+
 .newButton, .dropdown {
     margin: 0 10px 0;
 }
+
 ul {
+    max-width: 900px;
     text-align: center;
     list-style-type: none;
     padding: 0 10px 0;
+    margin: 0 auto 0;
     
 }
 
@@ -25,18 +40,18 @@ ul {
     border: 1px solid black;
     margin: 10px 10px;
     padding: 7px;
+    background-color: rgb(184, 180, 180);
 }
 
 .book button {
     float: right;
-    /* margin: 0 5px 0 0; */
     display: inline;
     align-self: right;
   
 }
 
 fieldset {
-
+    background-color: rgb(184, 180, 180);
     display: flex;
     flex-direction: row;
     margin: 10px 0;
@@ -48,6 +63,7 @@ fieldset {
 
 input {
     display: block;
+    background-color: lightgrey;
 }
 
 .top {
@@ -59,10 +75,18 @@ input {
     display: flex;
     align-items: center;
 }
-
+.newForm{
+    margin: 0 auto 0;
+    text-align: center;
+}
+.formView {
+    margin: 0 auto 0;
+}
 form {
+    max-width: 900px;
     text-align: center;
     padding: 10px 0;
+
 }
 
 .top input{
@@ -76,4 +100,25 @@ justify-content: space-between;;
 
 .hidden {
     display: none;
+}
+
+span {
+    font-weight: bold;
+}
+
+/* phone screen */
+@media screen and (min-width: 300px) {
+   /* .newForm {
+    margin: 0 auto 0;
+   } */
+}
+
+/*tablet screen*/
+@media screen and (min-width: 500px) {
+
+}
+
+/*desktop screen*/
+@media screen and (min-width: 900px) {
+
 }
