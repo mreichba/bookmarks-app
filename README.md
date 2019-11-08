@@ -3,6 +3,9 @@ Brookmarks is an app that allows the user to create and save a URL, name, rating
 
 Mason Reichbauer's submission for Thinkful Engineering Immersion Bookmarks App Project.
 
+Live page: https://thinkful-ei-iguana.github.io/masons-bookmarks-app/
+
+Repo page:https://github.com/thinkful-ei-iguana/masons-bookmarks-app
 ## Requirements
 As a user:
 
