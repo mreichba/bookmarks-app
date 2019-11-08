@@ -1,8 +1,10 @@
 *{
     box-sizing: border-box;
 }
+
 body{
     background-color: lightgrey;
+   
 }
 header {
     text-align: center;
@@ -16,6 +18,19 @@ header {
 .button a {
     color: black;
     text-decoration: none;
+}
+
+.subClose .button {
+    display: inline-block;
+    
+}
+.subClose {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom label {
+    display: flex;
 }
 
 .buttons {
@@ -51,10 +66,10 @@ ul {
 }
 
 fieldset {
-    background-color: rgb(184, 180, 180);
+    background-color: rgb(184, 180, 180);;
     display: flex;
-    flex-direction: row;
     margin: 10px 0;
+    
 }
 
 .description {
@@ -76,6 +91,7 @@ input {
     align-items: center;
 }
 .newForm{
+    max-width: 100%;
     margin: 0 auto 0;
     text-align: center;
 }
@@ -108,17 +124,21 @@ span {
 
 /* phone screen */
 @media screen and (min-width: 300px) {
-   /* .newForm {
-    margin: 0 auto 0;
-   } */
+    .bottom {
+        font-size: 3vw;
+    }
 }
 
 /*tablet screen*/
 @media screen and (min-width: 500px) {
-
+    .bottom {
+        font-size: 1em;
+    }
 }
 
 /*desktop screen*/
 @media screen and (min-width: 900px) {
-
+    .bottom {
+        font-size: 1.2em;
+    }
 }
