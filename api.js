@@ -5,11 +5,18 @@ const listApiFetch = function(...args) {
   return fetch(...args)
     .then(res => {
       if (!res.ok) {
-        // Valid HTTP response but non-2xx status - let's create an error!
+        // Valid HTTP response but non-2xx status - then create an error!
         error = { code: res.status };
+
+        // if response is not JSON type, place statusText in error object and
+        // immediately reject promise
+        if (!res.headers.get('content-type').includes('json')) {
+          error.message = res.statusText;
+          return Promise.reject(error);
+        }
       }
     
-      // In either case, parse the JSON stream:
+      // otherwise, parse the JSON stream:
       return res.json();
     })
     
@@ -33,9 +40,9 @@ const createBookmark = function(newBookmarkName) {
   let newData = JSON.stringify(newBookmarkName);
   return listApiFetch(`${BASE_URL}/bookmarks`, {
     method: 'POST',
-    headers: new Headers({
+    headers: {
       'Content-Type': 'application/json'
-    }),
+    },
     body: newData
   });
 };
@@ -43,9 +50,6 @@ const createBookmark = function(newBookmarkName) {
 const deleteBookmark = function(id){
   return listApiFetch(`${BASE_URL}/bookmarks/${id}`, {
     method: 'DELETE',
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
   });
 };
 

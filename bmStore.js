@@ -30,11 +30,6 @@ const addBookmark = function(bookmark){
   this.bookmarks.push(bookmark);
 };
 
-const findAndUpdate = function (id, newData) {
-  const bookmark = this.findById(id);
-  Object.assign(bookmark, newData);
-};
-
 const findAndDelete = function(id) {
   this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
 };
@@ -60,7 +55,6 @@ export default {
   findById,
   adding,
   findAndDelete,
-  findAndUpdate,
   addBookmark,
   toggleExpand,
   filterRating,

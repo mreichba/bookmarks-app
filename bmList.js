@@ -1,6 +1,5 @@
 import bmStore from './bmStore.js';
-import bmItem from './bmItem.js';
-
+import api from './api.js';
 
 const generateElementHTML = function(bookmark) {
   let bmHTML = '<ul class="bookmarks">';
@@ -15,7 +14,7 @@ const generateElementHTML = function(bookmark) {
         <p class="bmDescription-text">${bookmark.description}</p>
       </div>
       <div class="bmControls">
-        <button class="bmWebsite button">Visit Site</button>
+        <button class="bmWebsite button" target="_blank" onclick="window.open('${bookmark.url}','newwindow'>Visit Site</button>
         <button class="bmDelete button">Remove</button>
       </div>
     </li>
@@ -47,11 +46,12 @@ const generateFormElementHTML = function() {
   `;
 };
 
-function formRender(){
+const formRender = function(){
   $('.newForm').html(generateFormElementHTML);
-}
+};
 
-function render() {
+const render = function() {
+  renderError();
   let bookmarks = [...bmStore.bookmarks];
   
   if (bmStore.filterNum) {
@@ -60,29 +60,29 @@ function render() {
   const bookmarkListString = generateBookmarkString(bookmarks);
   
   $('.list').html(bookmarkListString);
-}
+};
 
-function generateBookmarkString(bookmarks) {
+const generateBookmarkString = function(bookmarks) {
   const bookmarkItems = bookmarks.map((bookmark) => generateElementHTML(bookmark));
   return bookmarkItems.join('');
-}
+};
 
-function handleAddBookmarkFormClick() {
+const handleAddBookmarkFormClick = function() {
   $('.new').click(event => {
     event.preventDefault();
     formRender();
     $('.new').addClass('hidden');
   });
-}
+};
 
-function serializeJson(form) {
+const serializeJson = function(form) {
   const formData = new FormData(form);
   let obj = {};
   formData.forEach((val, name) => obj[name] = val);
-  return obj;
-}
+  return JSON.stringify(obj);
+};
 
-function handleNewBookmarkSubmit() {
+const handleNewBookmarkSubmit = function() {
   // console.log('handle submit called!');
   $('.newForm').on('submit', 'form', event => {
     // console.log('this called!');
@@ -93,36 +93,45 @@ function handleNewBookmarkSubmit() {
     $('.new').removeClass('hidden');
     $('.formView').addClass('hidden');
     $('.formView')[0].reset();
-    const newMark = bmItem.create(newBookmarkName);
-    bmStore.addBookmark(newMark);  
-    console.log(bmStore);        
-    render();
+    api.createBookmark(newBookmarkName)
+      .then((newBookmark) => {
+        bmStore.addBookmark(newBookmark);          
+        render();
+      })
+      .catch(error => {
+        bmStore.setError(error.message);
+        renderError();
+      });
   });
-}
+};
 
-function handleNewBookmarkClose() {
+const handleNewBookmarkClose = function() {
   $('.newForm').on('click', '.formClose', event => {
     event.preventDefault();
     $('.formView').addClass('hidden');
     $('.new').removeClass('hidden');
   });
-}
+};
 
-function getElementBookmarkID(bookmark) {
+const getElementBookmarkID = function(bookmark) {
   return $($(bookmark).closest('.book')).attr('id');
-}
+};
 
-function handleDeleteBookmarkClicked() {
+const handleDeleteBookmarkClicked = function() {
   $('.list').on('click', '.bmDelete', event => {
-    console.log('remove called!');
     const id = getElementBookmarkID(event.currentTarget);
-    console.log(id);
-    bmStore.findAndDelete(id);
-    render();
+    api.deleteBookmark(id)
+      .then(() => {
+        bmStore.findAndDelete(id);
+      })
+      .catch((error) => {
+        bmStore.setError(error.message);
+        render();
+      });
   });
-}
+};
 
-function handleBookmarkExpandClicked() {
+const handleBookmarkExpandClicked = function() {
   $('.list').on('click', '.expand', event => {
     event.preventDefault();
     let collapse = $(event.target).text();
@@ -136,33 +145,41 @@ function handleBookmarkExpandClicked() {
      
     }
   });
-}
+};
 
-function handleRatingsFilter() {
+const handleRatingsFilter = function() {
   $('.dropdown').on('change', event => {
     const ratingChosen = $(event.currentTarget).val();
     bmStore.filterRating(ratingChosen);
     render();
   });
-}
+};
 
-// const generateError = function (message) {
-//   return `
-//       <section class="error-content">
-//         <button id="cancel-error">X</button>
-//         <p>${message}</p>
-//       </section>
-//     `;
-// };
+const generateError = function (message) {
+  return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+};
 
-// const renderError = function () {
-//   if (store.error) {
-//     const el = generateError(store.error);
-//     $('.error-container').html(el);
-//   } else {
-//     $('.error-container').empty();
-//   }
-// };
+const renderError = function () {
+  if (bmStore.error) {
+    const el = generateError(bmStore.error);
+    $('.error-container').html(el);
+  } else {
+    $('.error-container').empty();
+  }
+};
+
+const handleCloseError = function () {
+  $('.error-container').on('click', '#cancel-error', () => {
+    bmStore.setError(null);
+    renderError();
+  });
+};
+
 
 function bindEventListeners() {
   handleAddBookmarkFormClick();
@@ -171,6 +188,7 @@ function bindEventListeners() {
   handleNewBookmarkSubmit();
   handleDeleteBookmarkClicked();
   handleRatingsFilter();
+  handleCloseError();
 }
 
 export default {
