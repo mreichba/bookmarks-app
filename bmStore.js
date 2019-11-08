@@ -48,6 +48,10 @@ const filterRating = function(rating) {
   this.filterNum = rating;
 };
 
+const setError = function (error) {
+  this.error = error;
+};
+
 
 export default {
   bookmarks,
@@ -59,5 +63,6 @@ export default {
   findAndUpdate,
   addBookmark,
   toggleExpand,
-  filterRating
+  filterRating,
+  setError,
 };

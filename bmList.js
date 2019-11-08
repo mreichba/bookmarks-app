@@ -1,4 +1,5 @@
-import bmStore from './bmStore.js'; 
+import bmStore from './bmStore.js';
+import bmItem from './bmItem.js';
 
 
 const generateElementHTML = function(bookmark) {
@@ -39,8 +40,8 @@ const generateFormElementHTML = function() {
         <input class="radio" type="radio" name="rating" value="2-star"> 2-Star<br>  
         <input class="radio" type="radio" name="rating" value="1-star"> 1-Star<br>   
       </div>  
+      <input class="formSubmit button" type="submit" value="Submit"></input>
     </fieldset>
-        <input class="formSubmit button" type="submit" value="Submit"></input>
         <input class="formClose button" type="button" value="Close"></input>
     </form>
   `;
@@ -82,17 +83,18 @@ function serializeJson(form) {
 }
 
 function handleNewBookmarkSubmit() {
-  console.log('handle submit called!')
-  $('.newForm').on('submit', '.formSubmit', event => {
-    console.log('this called!');
+  // console.log('handle submit called!');
+  $('.newForm').on('submit', 'form', event => {
+    // console.log('this called!');
     event.preventDefault();
     let formElement = $('.formView')[0];
-    console.log(formElement);
+    // console.log(formElement);
     let newBookmarkName = serializeJson(formElement);
-    // $('.new').removeClass('hidden');
-    // $('.formView').addClass('hidden');
-    // $('.formView')[0].reset();
-    bmStore.addBookmark(newBookmarkName);  
+    $('.new').removeClass('hidden');
+    $('.formView').addClass('hidden');
+    $('.formView')[0].reset();
+    const newMark = bmItem.create(newBookmarkName);
+    bmStore.addBookmark(newMark);  
     console.log(bmStore);        
     render();
   });
@@ -112,7 +114,9 @@ function getElementBookmarkID(bookmark) {
 
 function handleDeleteBookmarkClicked() {
   $('.list').on('click', '.bmDelete', event => {
+    console.log('remove called!');
     const id = getElementBookmarkID(event.currentTarget);
+    console.log(id);
     bmStore.findAndDelete(id);
     render();
   });
@@ -122,15 +126,11 @@ function handleBookmarkExpandClicked() {
   $('.list').on('click', '.expand', event => {
     event.preventDefault();
     let collapse = $(event.target).text();
-    console.log(collapse);
-    if (collapse === '+') {
-      console.log(collapse);
-      
+    if (collapse === '+') {      
       $(event.target).parent().find('.expand-collapse').removeClass('hidden');
       $(event.target).html('-');
     } 
     if (collapse === '-') {
-      console.log(collapse);
       $(event.target).parent().find('.expand-collapse').addClass('hidden');
       $(event.target).html('+');
      
@@ -145,6 +145,24 @@ function handleRatingsFilter() {
     render();
   });
 }
+
+// const generateError = function (message) {
+//   return `
+//       <section class="error-content">
+//         <button id="cancel-error">X</button>
+//         <p>${message}</p>
+//       </section>
+//     `;
+// };
+
+// const renderError = function () {
+//   if (store.error) {
+//     const el = generateError(store.error);
+//     $('.error-container').html(el);
+//   } else {
+//     $('.error-container').empty();
+//   }
+// };
 
 function bindEventListeners() {
   handleAddBookmarkFormClick();
