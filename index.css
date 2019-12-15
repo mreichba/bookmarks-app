@@ -11,8 +11,14 @@ header {
 
 }
 
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
 .dropdown {
     background-color: rgb(184, 180, 180);
+    
 }
 
 .button a {
@@ -34,16 +40,17 @@ header {
 }
 
 .buttons {
-    display: flex;
+    display: inline-block;
     justify-content: center;
 }
 
 .newButton, .dropdown {
-    margin: 0 10px 0;
+    margin: 10px;
 }
 
 ul {
     max-width: 900px;
+    width: 80%;
     text-align: center;
     list-style-type: none;
     padding: 0 10px 0;
@@ -108,7 +115,10 @@ form {
 .top input{
     margin: 5px;
 }
-
+.bmTitle {
+    display: flex;
+    justify-content: space-around;
+}
 .bmControls{
 display: flex;
 justify-content: space-between;;
