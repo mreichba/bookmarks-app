@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,30 @@
     <title>Bookmark App</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <header role="banner" class="header">
         <h1 aria-label="Bookmark App">My Bookmarks</h1>
         <div class="buttons">
-            <button type ="button" id="newBookmark" class="newButton"> + New Bookmark</button>
+            <button type="button" id="newBookmark" class="newButton"> + New Bookmark</button>
             <select class="dropdown" name="ratings" aria-label="ratings" aria-live="polite">
                 <option value="filterReviews" name="">--Filter Reviews by Rating--</option>
-                <option value="5" name=">= 5-star">>= 5-star</option>
-                <option value="4" name=">= 4-star">>= 4-star</option>
-                <option value="3" name=">= 3-star">>= 3-star</option>
-                <option value="2" name=">= 2-star">>= 2-star</option>
-                <option value="1" name=">= 1-star">>= 1-star</option>
-                <option value="0" name=">= 0-star">>= 0-star</option>
+                <option value="5" name=">= 5-star">5 or more stars</option>
+                <option value="4" name=">= 4-star">4 or more stars</option>
+                <option value="3" name=">= 3-star">3 or more stars</option>
+                <option value="2" name=">= 2-star">2 or more stars</option>
+                <option value="1" name=">= 1-star">1 or more stars</option>
+                <option value="0" name=">= 0-star">0 or more stars</option>
             </select>
         </div>
         <div class="newForm" aria-live="polite"></div>
         <div class="error-container" aria-live="polite"></div>
     </header>
-    
+
     <main class="list" aria-live="polite"></main>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="index.js" type="module"></script>
 </body>
+
 </html>

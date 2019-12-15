@@ -3,7 +3,7 @@ import bmStore from './bmStore.js';
 import api from './api.js';
 
 //generates bookmark element html
-const generateElementHTML = function(bookmark) {
+const generateElementHTML = function (bookmark) {
   let bmHTML = '<ul class="bookmarks">';
   return bmHTML += `
     <li role="listitem" id="${bookmark.id}" class="book">
@@ -24,8 +24,8 @@ const generateElementHTML = function(bookmark) {
   `;
 };
 //generates the form element html
-const generateFormElementHTML = function() {
-  let createForm ='<form class="formView">';
+const generateFormElementHTML = function () {
+  let createForm = '<form class="formView">';
   return createForm += `
     <fieldset>
       <div class="top">
@@ -62,53 +62,53 @@ const generateFormElementHTML = function() {
   `;
 };
 //renders form elements to html
-const formRender = function(){
+const formRender = function () {
   $('.newForm').html(generateFormElementHTML);
 };
 //renders errors, then checks filter property and applies its value, then generates the bookmarks in html
-const render = function() {
+const render = function () {
   renderError();
   let bookmarks = [...bmStore.bookmarks];
-  
+
   if (bmStore.filterNum) {
     bookmarks = bookmarks.filter(bookmark => bookmark.rating >= bmStore.filterNum);
   }
   const bookmarkListString = generateBookmarkString(bookmarks);
-  
+
   $('.list').html(bookmarkListString);
 };
 //iterates through and generates each bookmark into a string
-const generateBookmarkString = function(bookmarks) {
+const generateBookmarkString = function (bookmarks) {
   const bookmarkItems = bookmarks.map((bookmark) => generateElementHTML(bookmark));
   return bookmarkItems.join('');
 };
 //renders the new bookmark form when adding a bookmark
-const handleAddBookmarkFormClick = function() {
-  $('.new').click(event => {
+const handleAddBookmarkFormClick = function () {
+  $('.newButton').click(event => {
     event.preventDefault();
     formRender();
     $('.new').addClass('hidden');
   });
 };
 //takes in form data and turns it into a key:value pair obj and stringifys it
-const serializeJson = function(form) {
+const serializeJson = function (form) {
   const formData = new FormData(form);
   let obj = {};
   formData.forEach((val, name) => obj[name] = val);
   return JSON.stringify(obj);
 };
 //when clicked sends form info to api to create new bookmark and updates store and catches errors if there are any
-const handleNewBookmarkSubmit = function() {
+const handleNewBookmarkSubmit = function () {
   $('.newForm').on('submit', 'form', event => {
     event.preventDefault();
     let formElement = $('.formView')[0];
     let newBookmarkName = serializeJson(formElement);
-    $('.new').removeClass('hidden');
+    $('.newButton').removeClass('hidden');
     $('.formView').addClass('hidden');
     $('.formView')[0].reset();
     api.createBookmark(newBookmarkName)
       .then((newBookmark) => {
-        bmStore.addBookmark(newBookmark);          
+        bmStore.addBookmark(newBookmark);
         render();
       })
       .catch(error => {
@@ -118,19 +118,19 @@ const handleNewBookmarkSubmit = function() {
   });
 };
 //closes the new bookmark form
-const handleNewBookmarkClose = function() {
+const handleNewBookmarkClose = function () {
   $('.newForm').on('click', '.formClose', event => {
     event.preventDefault();
     $('.formView').addClass('hidden');
-    $('.new').removeClass('hidden');
+    $('.newButton').removeClass('hidden');
   });
 };
 //finds elements by ID
-const getElementBookmarkID = function(bookmark) {
+const getElementBookmarkID = function (bookmark) {
   return $($(bookmark).closest('.book')).attr('id');
 };
 //deletes bookmark with api then updates the store and catches any errors
-const handleDeleteBookmarkClicked = function() {
+const handleDeleteBookmarkClicked = function () {
   $('.list').on('click', '.bmDelete', event => {
     const id = getElementBookmarkID(event.currentTarget);
     api.deleteBookmark(id)
@@ -145,23 +145,23 @@ const handleDeleteBookmarkClicked = function() {
   });
 };
 //expands each bookmark and in turn collapses as well
-const handleBookmarkExpandClicked = function() {
+const handleBookmarkExpandClicked = function () {
   $('.list').on('click', '.expand', event => {
     event.preventDefault();
     let collapse = $(event.target).text();
-    if (collapse === '+') {      
+    if (collapse === '+') {
       $(event.target).parent().find('.expand-collapse').removeClass('hidden');
       $(event.target).html('-');
-    } 
+    }
     if (collapse === '-') {
       $(event.target).parent().find('.expand-collapse').addClass('hidden');
       $(event.target).html('+');
-     
+
     }
   });
 };
 //updates store based on which rating filter is chosen
-const handleRatingsFilter = function() {
+const handleRatingsFilter = function () {
   $('.dropdown').on('change', event => {
     const ratingChosen = $(event.currentTarget).val();
     bmStore.filterRating(ratingChosen);
@@ -195,7 +195,7 @@ const handleCloseError = function () {
 };
 
 //binds event listeners for easy export
-const bindEventListeners = function() {
+const bindEventListeners = function () {
   handleAddBookmarkFormClick();
   handleNewBookmarkClose();
   handleBookmarkExpandClicked();
