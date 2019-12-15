@@ -23,6 +23,7 @@ const generateElementHTML = function (bookmark) {
   </ul>
   `;
 };
+
 //generates the form element html
 const generateFormElementHTML = function () {
   let createForm = '<form class="formView">';
@@ -61,10 +62,14 @@ const generateFormElementHTML = function () {
     </form>
   `;
 };
+
+
 //renders form elements to html
 const formRender = function () {
   $('.newForm').html(generateFormElementHTML);
 };
+
+
 //renders errors, then checks filter property and applies its value, then generates the bookmarks in html
 const render = function () {
   renderError();
@@ -77,11 +82,15 @@ const render = function () {
 
   $('.list').html(bookmarkListString);
 };
+
+
 //iterates through and generates each bookmark into a string
 const generateBookmarkString = function (bookmarks) {
   const bookmarkItems = bookmarks.map((bookmark) => generateElementHTML(bookmark));
   return bookmarkItems.join('');
 };
+
+
 //renders the new bookmark form when adding a bookmark
 const handleAddBookmarkFormClick = function () {
   $('.newButton').click(event => {
@@ -90,6 +99,8 @@ const handleAddBookmarkFormClick = function () {
     $('.new').addClass('hidden');
   });
 };
+
+
 //takes in form data and turns it into a key:value pair obj and stringifys it
 const serializeJson = function (form) {
   const formData = new FormData(form);
@@ -97,6 +108,8 @@ const serializeJson = function (form) {
   formData.forEach((val, name) => obj[name] = val);
   return JSON.stringify(obj);
 };
+
+
 //when clicked sends form info to api to create new bookmark and updates store and catches errors if there are any
 const handleNewBookmarkSubmit = function () {
   $('.newForm').on('submit', 'form', event => {
@@ -117,6 +130,8 @@ const handleNewBookmarkSubmit = function () {
       });
   });
 };
+
+
 //closes the new bookmark form
 const handleNewBookmarkClose = function () {
   $('.newForm').on('click', '.formClose', event => {
@@ -125,10 +140,14 @@ const handleNewBookmarkClose = function () {
     $('.newButton').removeClass('hidden');
   });
 };
+
+
 //finds elements by ID
 const getElementBookmarkID = function (bookmark) {
   return $($(bookmark).closest('.book')).attr('id');
 };
+
+
 //deletes bookmark with api then updates the store and catches any errors
 const handleDeleteBookmarkClicked = function () {
   $('.list').on('click', '.bmDelete', event => {
@@ -144,6 +163,8 @@ const handleDeleteBookmarkClicked = function () {
       });
   });
 };
+
+
 //expands each bookmark and in turn collapses as well
 const handleBookmarkExpandClicked = function () {
   $('.list').on('click', '.expand', event => {
@@ -160,6 +181,8 @@ const handleBookmarkExpandClicked = function () {
     }
   });
 };
+
+
 //updates store based on which rating filter is chosen
 const handleRatingsFilter = function () {
   $('.dropdown').on('change', event => {
@@ -168,6 +191,8 @@ const handleRatingsFilter = function () {
     render();
   });
 };
+
+
 //creates an error with message and cancel button
 const generateError = function (message) {
   return `
@@ -177,6 +202,8 @@ const generateError = function (message) {
       </section>
     `;
 };
+
+
 //if there's an error it renders it if not it empties it
 const renderError = function () {
   if (bmStore.error) {
@@ -186,6 +213,8 @@ const renderError = function () {
     $('.error-container').empty();
   }
 };
+
+
 //sets store error back to null
 const handleCloseError = function () {
   $('.error-container').on('click', '#cancel-error', () => {
@@ -193,6 +222,7 @@ const handleCloseError = function () {
     renderError();
   });
 };
+
 
 //binds event listeners for easy export
 const bindEventListeners = function () {
@@ -204,6 +234,8 @@ const bindEventListeners = function () {
   handleRatingsFilter();
   handleCloseError();
 };
+
+
 //exports event listeners and render
 export default {
   render,

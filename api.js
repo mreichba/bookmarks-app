@@ -1,6 +1,7 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/mason';
 //calls fetch method and verifies errors, if all is good returns json data and converts it
-const listApiFetch = function(...args) {
+
+const listApiFetch = function (...args) {
   let error;
   return fetch(...args)
     .then(res => {
@@ -15,28 +16,29 @@ const listApiFetch = function(...args) {
           return Promise.reject(error);
         }
       }
-    
       // otherwise, parse the JSON stream:
       return res.json();
     })
-    
     .then(data => {
       // If error was flagged, reject the Promise with the error object
       if (error) {
         error.message = data.message;
         return Promise.reject(error);
       }
-    
       // Otherwise give back the data as resolved Promise
       return data;
     });
 };
+
+
 //calls fetch method through api
-const getBookmarks = function(){
+const getBookmarks = function () {
   return listApiFetch(`${BASE_URL}/bookmarks`);
 };
+
+
 //calls post method through api 
-const createBookmark = function(newBookmarkName) {
+const createBookmark = function (newBookmarkName) {
   return listApiFetch(`${BASE_URL}/bookmarks`, {
     method: 'POST',
     headers: {
@@ -45,12 +47,16 @@ const createBookmark = function(newBookmarkName) {
     body: newBookmarkName
   });
 };
+
+
 //calls delete method through api
-const deleteBookmark = function(id){
+const deleteBookmark = function (id) {
   return listApiFetch(`${BASE_URL}/bookmarks/${id}`, {
     method: 'DELETE',
   });
 };
+
+
 //exports relavent functions to other modules
 export default {
   getBookmarks,
